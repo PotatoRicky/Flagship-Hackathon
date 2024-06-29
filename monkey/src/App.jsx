@@ -14,8 +14,6 @@ function spawnBanana () {
   return { bananaHeight, bananaWidth };
 }
 
-
-
 function disableBanana() {
   const banana = document.querySelector("#banana");
   banana.style.width = 0;
