@@ -22,10 +22,11 @@ function disableBanana() {
 
 
 function App() {
-  const { minutes, seconds } = useTimer();
   const { bananaHeight, bananaWidth } = useMemo(() => spawnBanana(), []);
   const [count, setCount] = useState(0);
   const [monkeyState, setMonkeyState] = useState(sleeping);
+  const startSeconds = 6;
+  const [time, setTime] = useState(startSeconds);
 
   function changeBanana () {
     const screenWidth = window.innerWidth;
@@ -38,44 +39,44 @@ function App() {
     setCount(count + 1);
   }
 
-  function useTimer() {
-    const startSeconds = 600;
-    const [time, setTime] = useState(startSeconds);
-  
-    useEffect(() => {
-      const interval = setInterval(() => {
-        if (time > 0) {
-          setTime(time => time - 1);
-        } else if (time === 0) {
-          document.querySelector("#timer").innerHTML = '';
-          wakeMonkey()
-          setTime(-1);
-        }
-      }, 1000);
-  
-      return () => clearInterval(interval);
-    }, [time]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (time > 0) {
+        setTime(time => time - 1);
+      } else if (time === 0) {
+        document.querySelector("#timer").innerHTML = '';
+        wakeMonkey()
+        setTime(-1);
+      }
+      
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      console.log(minutes)
+      console.log(seconds)
+      const timer = document.querySelector("#timer");
+      if (timer) {
+        timer.props.minutes = minutes;
+        timer.props.seconds = seconds;
+      }
 
-    useEffect(() => {
-      const toggleState = setInterval(() => {
-        if (monkeyState === sleeping) {
-          // do nothing
-        } else if (monkeyState === open) {
-          setMonkeyState(closed);
-        } else if (monkeyState === closed) {
-          setMonkeyState(open);
-          playSound();
-        }
-      }, 500);
-      return () => clearInterval(toggleState);
-    })
+    }, 1000);
 
-    
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-  
-    return { minutes, seconds };
-  }
+    return () => clearInterval(interval);
+  }, [time]);
+
+  useEffect(() => {
+    const toggleState = setInterval(() => {
+      if (monkeyState === sleeping) {
+        // do nothing
+      } else if (monkeyState === open) {
+        setMonkeyState(closed);
+      } else if (monkeyState === closed) {
+        setMonkeyState(open);
+        playSound();
+      }
+    }, 500);
+    return () => clearInterval(toggleState);
+  })
 
   function wakeMonkey() {
     setMonkeyState(open);
@@ -93,7 +94,6 @@ function App() {
     }
   },[count])
 
-  
   return (
     <>
       <div className="App" style={{flexDirection: 'column', alignItems: 'center'}}>
@@ -101,7 +101,7 @@ function App() {
           height: '484px',
         }}>
         </img>
-        <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
+        <Timer/>
         <img src={banana} alt='banana' id='banana' style={{
           position: 'absolute',
           top: `${bananaHeight}px`,
