@@ -14,8 +14,6 @@ function spawnBanana () {
   return { bananaHeight, bananaWidth };
 }
 
-
-
 function disableBanana() {
   const banana = document.querySelector("#banana");
   banana.style.width = 0;
@@ -40,7 +38,6 @@ function App() {
     banana.style.left = `${bananaWidth}px`;
     setCount(count + 1);
   }
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -96,10 +93,6 @@ function App() {
       setMonkeyState(sleeping)
     }
   },[count])
-
-  function Timer(props) {
-    return <p id="timer">{props.minutes}:{props.seconds < 10 ? '0' + props.seconds : props.seconds}</p>
-  }
 
   return (
     <>
