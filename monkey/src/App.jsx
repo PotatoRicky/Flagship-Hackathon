@@ -1,32 +1,32 @@
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function Timer() {
-  var duration = 100;
-  var sec = duration % 60;
-  var minute = Math.floor(duration / 60);
-  setInterval(() => {
-      document.querySelector("#timer").innerHTML=minute+':'+sec;
-      sec--;
-      if (sec < 0) {
-          sec = 60;
-          minute--;
+function useTimer() {
+  const startSeconds = 10;
+  const [time, setTime] = useState(startSeconds);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (time > 0) {
+        setTime(time => time - 1);
+      } else if (time === 0) {
+        document.querySelector("#timer").innerHTML = '';
       }
-      if (minute < 0) {
-          clearInterval(Timer);
-          // play sounds here
-          return true;
-      }
-  }, 1000);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [time]);
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+
+  return { minutes, seconds };
 }
 
-
-
 function App() {
-  Timer();
+  const { minutes, seconds } = useTimer();
   return (
     <div className="App">
-      <p id="timer">yipe</p>
-      <button type="button" onclick="Timer()">Start</button>
+      <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
     </div>
   );
 }
