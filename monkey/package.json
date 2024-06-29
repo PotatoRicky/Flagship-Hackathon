@@ -1,7 +1,7 @@
 {
   "name": "monkey",
   "version": "0.1.0",
-  "homepage": "https://PotatoRicky.github.io/Flagship-Hackathon",
+  "homepage": "https://potatoricky.github.io/Flagship-Hackathon",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

@@ -111,7 +111,7 @@ function App() {
         }}>Zzzzzz</h1>
 
         <img id="monkey" alt="monkey" src={monkeyState} style={{
-          width: '90%',
+          height: '60%',
           top: '30%',
           alignSelf: 'center',
         }}>
