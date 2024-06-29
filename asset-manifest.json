@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Flagship-Hackathon/static/css/main.1e2fcd4a.css",
+    "main.js": "/Flagship-Hackathon/static/js/main.5b04031e.js",
+    "static/js/453.67e82851.chunk.js": "/Flagship-Hackathon/static/js/453.67e82851.chunk.js",
+    "static/media/open.png": "/Flagship-Hackathon/static/media/open.eb0a507f877581ba9374.png",
+    "static/media/closed.png": "/Flagship-Hackathon/static/media/closed.2cee4a647918cd8b4d8c.png",
+    "static/media/sleeping.jpeg": "/Flagship-Hackathon/static/media/sleeping.d9b9cd22c8c17ae9ffee.jpeg",
+    "static/media/crash.mp3": "/Flagship-Hackathon/static/media/crash.48c60f37853e8d66be55.mp3",
+    "static/media/banana.jpg": "/Flagship-Hackathon/static/media/banana.ffeb01882ddb2a53fd91.jpg",
+    "static/media/alarm.png": "/Flagship-Hackathon/static/media/alarm.c939ca42ded2212f7834.png",
+    "static/media/monkey_face.png": "/Flagship-Hackathon/static/media/monkey_face.ee6799727a4e1b20b1e0.png",
+    "index.html": "/Flagship-Hackathon/index.html",
+    "main.1e2fcd4a.css.map": "/Flagship-Hackathon/static/css/main.1e2fcd4a.css.map",
+    "main.5b04031e.js.map": "/Flagship-Hackathon/static/js/main.5b04031e.js.map",
+    "453.67e82851.chunk.js.map": "/Flagship-Hackathon/static/js/453.67e82851.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1e2fcd4a.css",
+    "static/js/main.5b04031e.js"
+  ]
+}
