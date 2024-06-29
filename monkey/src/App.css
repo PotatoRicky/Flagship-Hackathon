@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 
@@ -17,8 +18,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #FFFAD4;
-}
-
-.banana {
-  position: absolute;
 }

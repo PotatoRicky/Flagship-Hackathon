@@ -5,6 +5,8 @@ import sleeping from './monkey/sleeping.jpeg'
 import closed from './monkey/closed.png'
 import open from './monkey/open.png'
 import cymbal from './crash.mp3'
+import monkeyFace from './monkey_face.png'
+import alarm from './alarm.png'
 
 function spawnBanana () {
   const screenWidth = window.innerWidth;
@@ -32,8 +34,8 @@ function App() {
   function changeBanana () {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
-    const bananaWidth = Math.floor(Math.random() * (screenWidth - 40));
+    const bananaHeight = Math.floor(Math.random() * (screenHeight - 120));
+    const bananaWidth = Math.floor(Math.random() * (screenWidth - 60));
     const banana = document.querySelector("#banana");
     banana.style.top = `${bananaHeight}px`;
     banana.style.left = `${bananaWidth}px`;
@@ -41,7 +43,7 @@ function App() {
   }
 
   function useTimer() {
-    const startSeconds = 6;
+    const startSeconds = 5;
     const [time, setTime] = useState(startSeconds);
   
     useEffect(() => {
@@ -52,6 +54,7 @@ function App() {
           document.querySelector("#timer").innerHTML = '';
           wakeMonkey()
           setTime(-1)
+          document.querySelector("#title").innerHTML = "FEED ME!";
         }
       }, 1000);
   
@@ -80,6 +83,7 @@ function App() {
     if (count >= 20) {
       disableBanana();
       sleepMonkey();
+      document.querySelector("#title").innerHTML = "Good Morning :)";
     }
   },[count])
 
@@ -93,28 +97,60 @@ function App() {
       } else if (monkeyState === closed) {
         setMonkeyState(open);
       }
-    }, 1000);
+    }, 800);
      return () => clearInterval(toggleState);
   }, [monkeyState])
 
   return (
     <>
       <div className="App" style={{flexDirection: 'column'}}>
+        <h1 id='title' style={{
+          position: 'absolute',
+          top: '5%',
+          alignSelf: 'center'
+        }}>Zzzzzz</h1>
+
         <img id="monkey" alt="monkey" src={monkeyState} style={{
-          height: '484px',
+          height: '60%',
+          top: '30%',
           alignSelf: 'center',
         }}>
 
         </img>
-        <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
+        <p id="timer" style={{
+          fontSize: '36px',
+          position: 'absolute',
+          top: '65%'
+        }}>{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
         <img src={banana} alt='banana' id='banana' style={{
           position: 'absolute',
           top: `${bananaHeight}px`,
           left: `${bananaWidth}px`,
-          width: '40px', 
-          height: '40px'
+          width: '60px', 
+          height: '60px'
           }} onClick={changeBanana}></img>
+          
+      <div id='icons' style={{
+          position: 'absolute',
+          bottom: '0px',
+          justifyContent: 'center',
+          height: '60px',
+          width: '100%',
+          backgroundColor: '#F4EFCD',
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          <img id='monkeyFace' alt='monkeyFace' src={monkeyFace} style={{
+            height: '48px',
+            margin: '20px'
+          }}></img>
+          <img id='alarm' alt='alarm' src={alarm} style={{
+            height: '48px',
+            margin: '20px',
+            color: '#B688FA'
+          }}></img>
       </div>
+      </div>    
     </>
   );
 }
