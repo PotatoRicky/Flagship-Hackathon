@@ -2,12 +2,28 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import banana from './banana.jpg';
 
-function spawnBanana () {
+function spawnBanana() {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
   const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
   const bananaWidth = Math.floor(Math.random() * (screenWidth - 40));
   return { bananaHeight, bananaWidth };
+}
+
+function changeBanana() {
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
+  const bananaWidth = Math.floor(Math.random() * (screenWidth - 40));
+  const banana = document.querySelector("#banana");
+  banana.style.top = `${bananaHeight}px`;
+  banana.style.left = `${bananaWidth}px`;
+}
+
+function disableBanana () {
+  const banana = document.querySelector("#banana");
+  banana.style.width = 0;
+  banana.style.height = 0;
 }
 
 function useTimer() {
@@ -31,39 +47,25 @@ function useTimer() {
   return { minutes, seconds };
 }
 
+<<<<<<< HEAD
 function disableBanana () {
   const banana = document.querySelector("#banana");
   banana.style.width = 0;
   banana.style.height = 0;
 }
 
+=======
+>>>>>>> d1d99d67119dd2d35c403a1373f6ce43cc07697c
 function App() {
   const { minutes, seconds } = useTimer();
   const { bananaHeight, bananaWidth } = useMemo(() => spawnBanana(), []);
-  const [count, setCount] = useState(0);
-
-  function changeBanana () {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
-    const bananaWidth = Math.floor(Math.random() * (screenWidth - 40));
-    const banana = document.querySelector("#banana");
-    banana.style.top = `${bananaHeight}px`;
-    banana.style.left = `${bananaWidth}px`;
-    setCount(count + 1);
-  }
-
-  useEffect(() => {
-    if (count >= 20) {
-      disableBanana();
-    }
-  },[count])
 
   return (
     <>
       <div className="App">
         <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
-        <img src={banana} alt='banana' id='banana' style={{
+        <img id="monkey" src ="./monkey/sleeping"></img>
+        <img id="banana" src={banana} alt='banana' style={{
           position: 'absolute',
           top: `${bananaHeight}px`,
           left: `${bananaWidth}px`,
