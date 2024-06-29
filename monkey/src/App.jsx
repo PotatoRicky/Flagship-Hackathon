@@ -63,6 +63,7 @@ function App() {
   return (
     <>
       <div className="App">
+        <img id="monkey" alt="monkey" src="./sleeping.jpeg"></img>
         <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
         <img src={banana} alt='banana' id='banana' style={{
           position: 'absolute',
