@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import banana from './banana.jpg';
 
-function spawnBanana () {
+function spawnBanana() {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
   const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
@@ -10,7 +10,7 @@ function spawnBanana () {
   return { bananaHeight, bananaWidth };
 }
 
-function changeBanana () {
+function changeBanana() {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
   const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
@@ -44,12 +44,19 @@ function useTimer() {
 function App() {
   const { minutes, seconds } = useTimer();
   const { bananaHeight, bananaWidth } = useMemo(() => spawnBanana(), []);
+  const { monkeyState, setMonkeyState } = useState("sleeping");
 
+  useEffect(() => {
+    
+  }
+
+  )
   return (
     <>
       <div className="App">
         <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
-        <img src={banana} alt='banana' id='banana' style={{
+        <img id="monkey" src ="./monkey/sleeping"></img>
+        <img id="banana" src={banana} alt='banana' style={{
           position: 'absolute',
           top: `${bananaHeight}px`,
           left: `${bananaWidth}px`,
