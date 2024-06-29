@@ -41,16 +41,17 @@ function useTimer() {
   return { minutes, seconds };
 }
 
+function disableBanana () {
+  const banana = document.querySelector("#banana");
+  banana.style.width = 0;
+  banana.style.height = 0;
+}
+
+
 function App() {
   const { minutes, seconds } = useTimer();
   const { bananaHeight, bananaWidth } = useMemo(() => spawnBanana(), []);
-  const { monkeyState, setMonkeyState } = useState("sleeping");
 
-  useEffect(() => {
-    
-  }
-
-  )
   return (
     <>
       <div className="App">
