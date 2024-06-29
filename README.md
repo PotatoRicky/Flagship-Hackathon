@@ -8,4 +8,4 @@ Your Task: Create a technical (or non-technical) solution to address these probl
 # Our Project Description
 A more effective alarm that prevents the user from just snoozing and going back to sleep. Slowly eases in the user with the sound of a monkey playing cymbals and becomes louder if left unaddressed. Bananas will be randomly generated on screen. When clicked, these will reduce the frequency and noise level of the alarm, eventually putting the monkey to sleep.
 
-now with extra monkeys:tm:
+now with extra monkeys™
