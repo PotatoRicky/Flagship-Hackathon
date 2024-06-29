@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: #FFFAD4;
-  height: 100vh; /* Optional: Makes the background cover the entire viewport */
+  height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,4 +19,6 @@
   color: #FFFAD4;
 }
 
-
+.banana {
+  position: absolute;
+}

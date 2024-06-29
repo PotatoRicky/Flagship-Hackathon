@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import banana from './banana.jpg';
+
+function spawnBanana () {
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
+  const bananaWidth = Math.floor(Math.random() * (screenWidth - 40));
+  return { bananaHeight, bananaWidth };
+}
 
 function useTimer() {
-  const startSeconds = 10;
+  const startSeconds = 600;
   const [time, setTime] = useState(startSeconds);
 
   useEffect(() => {
@@ -24,10 +33,20 @@ function useTimer() {
 
 function App() {
   const { minutes, seconds } = useTimer();
+  const { bananaHeight, bananaWidth } = spawnBanana();
   return (
-    <div className="App">
-      <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
-    </div>
+    <>
+      <div className="App">
+        <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
+        <img src={banana} alt='banana' style={{
+          position: 'absolute',
+          top: `${bananaHeight}px`,
+          left: `${bananaWidth}px`,
+          width: '40px', 
+          height: '40px'
+          }}></img>
+      </div>
+    </>
   );
 }
 
