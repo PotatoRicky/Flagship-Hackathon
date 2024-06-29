@@ -10,16 +10,6 @@ function spawnBanana () {
   return { bananaHeight, bananaWidth };
 }
 
-function changeBanana () {
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-  const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
-  const bananaWidth = Math.floor(Math.random() * (screenWidth - 40));
-  const banana = document.querySelector("#banana");
-  banana.style.top = `${bananaHeight}px`;
-  banana.style.left = `${bananaWidth}px`;
-}
-
 function useTimer() {
   const startSeconds = 600;
   const [time, setTime] = useState(startSeconds);
@@ -41,9 +31,34 @@ function useTimer() {
   return { minutes, seconds };
 }
 
+function disableBanana () {
+  const banana = document.querySelector("#banana");
+  banana.style.width = 0;
+  banana.style.height = 0;
+}
+
+
 function App() {
   const { minutes, seconds } = useTimer();
   const { bananaHeight, bananaWidth } = useMemo(() => spawnBanana(), []);
+  const [count, setCount] = useState(0);
+
+  function changeBanana () {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const bananaHeight = Math.floor(Math.random() * (screenHeight - 40));
+    const bananaWidth = Math.floor(Math.random() * (screenWidth - 40));
+    const banana = document.querySelector("#banana");
+    banana.style.top = `${bananaHeight}px`;
+    banana.style.left = `${bananaWidth}px`;
+    setCount(count + 1);
+  }
+
+  useEffect(() => {
+    if (count >= 20) {
+      disableBanana();
+    }
+  },[count])
 
   return (
     <>
