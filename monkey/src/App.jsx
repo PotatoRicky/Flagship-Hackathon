@@ -20,6 +20,12 @@ function changeBanana() {
   banana.style.left = `${bananaWidth}px`;
 }
 
+function disableBanana () {
+  const banana = document.querySelector("#banana");
+  banana.style.width = 0;
+  banana.style.height = 0;
+}
+
 function useTimer() {
   const startSeconds = 600;
   const [time, setTime] = useState(startSeconds);
@@ -40,13 +46,6 @@ function useTimer() {
 
   return { minutes, seconds };
 }
-
-function disableBanana () {
-  const banana = document.querySelector("#banana");
-  banana.style.width = 0;
-  banana.style.height = 0;
-}
-
 
 function App() {
   const { minutes, seconds } = useTimer();
