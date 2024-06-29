@@ -111,7 +111,7 @@ function App() {
         }}>Zzzzzz</h1>
 
         <img id="monkey" alt="monkey" src={monkeyState} style={{
-          height: '60%',
+          width: '90%',
           top: '30%',
           alignSelf: 'center',
         }}>
@@ -142,11 +142,11 @@ function App() {
         }}>
           <img id='monkeyFace' alt='monkeyFace' src={monkeyFace} style={{
             height: '48px',
-            margin: '20px'
+            margin: '40px'
           }}></img>
           <img id='alarm' alt='alarm' src={alarm} style={{
             height: '48px',
-            margin: '20px',
+            margin: '40px',
             color: '#B688FA'
           }}></img>
       </div>
