@@ -37,7 +37,6 @@ function disableBanana () {
   banana.style.height = 0;
 }
 
-
 function App() {
   const { minutes, seconds } = useTimer();
   const { bananaHeight, bananaWidth } = useMemo(() => spawnBanana(), []);
