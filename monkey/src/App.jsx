@@ -64,10 +64,7 @@ function App() {
 
   function wakeMonkey() {
     setMonkeyState(open);
-  }
-
-  function sleepMonkey() {
-    setMonkeyState(sleeping);
+    changeBanana();
   }
 
   function playSound() {
@@ -78,7 +75,7 @@ function App() {
   useEffect(() => {
     if (count >= 20) {
       disableBanana();
-      sleepMonkey();
+      setMonkeyState(sleeping)
     }
   },[count])
 
@@ -88,22 +85,20 @@ function App() {
         return () => clearInterval(toggleState);
       } else if (monkeyState === open) {
         setMonkeyState(closed);
-        playSound();
       } else if (monkeyState === closed) {
         setMonkeyState(open);
         playSound();
       }
-    }, 600)
+    }, 500);
+    return () => clearInterval(toggleState);
   })
 
   return (
     <>
-      <div className="App" style={{flexDirection: 'column'}}>
+      <div className="App" style={{flexDirection: 'column', alignItems: 'center'}}>
         <img id="monkey" alt="monkey" src={monkeyState} style={{
           height: '484px',
-          alignSelf: 'center',
         }}>
-
         </img>
         <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
         <img src={banana} alt='banana' id='banana' style={{
