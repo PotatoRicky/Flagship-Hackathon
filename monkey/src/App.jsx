@@ -14,6 +14,8 @@ function spawnBanana () {
   return { bananaHeight, bananaWidth };
 }
 
+
+
 function disableBanana() {
   const banana = document.querySelector("#banana");
   banana.style.width = 0;
@@ -22,11 +24,10 @@ function disableBanana() {
 
 
 function App() {
+  const { minutes, seconds } = useTimer();
   const { bananaHeight, bananaWidth } = useMemo(() => spawnBanana(), []);
   const [count, setCount] = useState(0);
   const [monkeyState, setMonkeyState] = useState(sleeping);
-  const startSeconds = 6;
-  const [time, setTime] = useState(startSeconds);
 
   function changeBanana () {
     const screenWidth = window.innerWidth;
@@ -39,47 +40,35 @@ function App() {
     setCount(count + 1);
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (time > 0) {
-        setTime(time => time - 1);
-      } else if (time === 0) {
-        document.querySelector("#timer").innerHTML = '';
-        wakeMonkey()
-        setTime(-1);
-      }
-      
-      const minutes = Math.floor(time / 60);
-      const seconds = time % 60;
-      console.log(minutes)
-      console.log(seconds)
-      const timer = document.querySelector("#timer");
-      if (timer) {
-        timer.props.minutes = minutes;
-        timer.props.seconds = seconds;
-      }
-
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [time]);
-
-  useEffect(() => {
-    const toggleState = setInterval(() => {
-      if (monkeyState === sleeping) {
-        // do nothing
-      } else if (monkeyState === open) {
-        setMonkeyState(closed);
-      } else if (monkeyState === closed) {
-        setMonkeyState(open);
-        playSound();
-      }
-    }, 500);
-    return () => clearInterval(toggleState);
-  })
+  function useTimer() {
+    const startSeconds = 6;
+    const [time, setTime] = useState(startSeconds);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if (time > 0) {
+          setTime(time => time - 1);
+        } else if (time === 0) {
+          document.querySelector("#timer").innerHTML = '';
+          wakeMonkey()
+          setTime(-1)
+        }
+      }, 1000);
+  
+      return () => clearInterval(interval);
+    }, [time]);
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+  
+    return { minutes, seconds };
+  }
 
   function wakeMonkey() {
     setMonkeyState(open);
+  }
+
+  function sleepMonkey() {
+    setMonkeyState(sleeping);
   }
 
   function playSound() {
@@ -90,18 +79,34 @@ function App() {
   useEffect(() => {
     if (count >= 20) {
       disableBanana();
-      setMonkeyState(sleeping)
+      sleepMonkey();
     }
   },[count])
 
+  useEffect(() => {
+    const toggleState = setInterval(() => {
+      if (monkeyState === sleeping) {
+        
+      } else if (monkeyState === open) {
+        setMonkeyState(closed);
+        playSound();
+      } else if (monkeyState === closed) {
+        setMonkeyState(open);
+      }
+    }, 1000);
+     return () => clearInterval(toggleState);
+  }, [monkeyState])
+
   return (
     <>
-      <div className="App" style={{flexDirection: 'column', alignItems: 'center'}}>
+      <div className="App" style={{flexDirection: 'column'}}>
         <img id="monkey" alt="monkey" src={monkeyState} style={{
           height: '484px',
+          alignSelf: 'center',
         }}>
+
         </img>
-        <Timer/>
+        <p id="timer">{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
         <img src={banana} alt='banana' id='banana' style={{
           position: 'absolute',
           top: `${bananaHeight}px`,
